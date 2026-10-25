@@ -13,6 +13,7 @@ import {
   Phone,
   Heart,
 } from "lucide-react";
+import { StaggerContainer, StaggerItem } from "@/components/animation/stagger-container";
 
 export function TrustRowAndFooter() {
   const currentYear = new Date().getFullYear();
@@ -44,32 +45,38 @@ export function TrustRowAndFooter() {
             Rootkind Botanical Standards and Guarantees
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+          <StaggerContainer
+            as="div"
+            staggerDelay={0.08}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10"
+          >
             {TRUST_CLAIMS.map((claim) => {
               const IconComp = getClaimIcon(claim.icon);
               return (
-                <div key={claim.id} className="flex flex-col items-start gap-3.5">
-                  {/* Icon circle */}
-                  <div
-                    className="w-12 h-12 rounded-full bg-[#1A4533] border border-[#2B684F] text-[#F0C4A0] flex items-center justify-center shrink-0"
-                    aria-hidden="true"
-                  >
-                    <IconComp className="w-5 h-5" />
+                <StaggerItem key={claim.id} yOffset={20}>
+                  <div className="flex flex-col items-start gap-3.5">
+                    {/* Icon circle */}
+                    <div
+                      className="w-12 h-12 rounded-full bg-[#1A4533] border border-[#2B684F] text-[#F0C4A0] flex items-center justify-center shrink-0"
+                      aria-hidden="true"
+                    >
+                      <IconComp className="w-5 h-5" />
+                    </div>
+
+                    {/* h3 Heading */}
+                    <h3 className="font-serif font-bold text-base sm:text-lg text-white leading-snug">
+                      {claim.title}
+                    </h3>
+
+                    {/* One line description */}
+                    <p className="text-xs sm:text-sm text-[#D5DFD2] leading-relaxed">
+                      {claim.description}
+                    </p>
                   </div>
-
-                  {/* h3 Heading */}
-                  <h3 className="font-serif font-bold text-base sm:text-lg text-white leading-snug">
-                    {claim.title}
-                  </h3>
-
-                  {/* One line description */}
-                  <p className="text-xs sm:text-sm text-[#D5DFD2] leading-relaxed">
-                    {claim.description}
-                  </p>
-                </div>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerContainer>
         </section>
 
         {/* 2. MAIN FOOTER CONTENT */}

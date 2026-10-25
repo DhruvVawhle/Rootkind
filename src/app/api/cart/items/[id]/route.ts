@@ -10,10 +10,24 @@ export async function PATCH(
 ) {
   try {
     const { id } = await params;
-    const body = await req.json();
+
+    // Safely extract request body to handle empty, malformed, or aborted client streams
+    let body: any = {};
+    try {
+      const text = await req.text();
+      if (text && text.trim().length > 0) {
+        body = JSON.parse(text);
+      }
+    } catch {
+      return NextResponse.json({ error: "Invalid JSON payload" }, { status: 400 });
+    }
+
     const parsed = UpdateCartItemSchema.safeParse({ itemId: id, ...body });
     if (!parsed.success) {
-      return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
+      return NextResponse.json(
+        { error: parsed.error.issues[0]?.message || "Invalid cart item parameters" },
+        { status: 400 }
+      );
     }
 
     const { quantity } = parsed.data;
@@ -47,7 +61,10 @@ export async function PATCH(
 
     const updatedCart = await getActiveCart(user?.userId);
     return NextResponse.json(updatedCart);
-  } catch (error) {
+  } catch (error: any) {
+    if (error?.name === "AbortError" || error?.code === "ECONNRESET") {
+      return new NextResponse(null, { status: 499 });
+    }
     console.error("[PATCH /api/cart/items/[id] error]:", error);
     return NextResponse.json({ error: "Failed to update item" }, { status: 500 });
   }
@@ -74,7 +91,10 @@ export async function DELETE(
 
     const updatedCart = await getActiveCart(user?.userId);
     return NextResponse.json(updatedCart);
-  } catch (error) {
+  } catch (error: any) {
+    if (error?.name === "AbortError" || error?.code === "ECONNRESET") {
+      return new NextResponse(null, { status: 499 });
+    }
     console.error("[DELETE /api/cart/items/[id] error]:", error);
     return NextResponse.json({ error: "Failed to delete item" }, { status: 500 });
   }

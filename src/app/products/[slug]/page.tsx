@@ -9,6 +9,7 @@ import { CartDrawer } from "@/components/layout/cart-drawer";
 import { CartProvider } from "@/context/cart-context";
 import { ProductDetailView } from "@/components/product/product-detail-view";
 import { ProductCard } from "@/components/storefront/product-card";
+import { ScrollReveal } from "@/components/animation/scroll-reveal";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
@@ -153,25 +154,27 @@ export default async function ProductDetailPage({
             {/* Related Botanical Products */}
             {relatedProducts.length > 0 && (
               <div className="mt-24 pt-12 border-t border-[#DCD5C1]">
-                <div className="flex items-end justify-between mb-8">
-                  <div>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-[#7D9565] block mb-1">
-                      Companion Planting
-                    </span>
-                    <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#153F2D]">
-                      Pairs Well In The Garden
-                    </h2>
+                <ScrollReveal animation="fade-up" delay={0.05} distance={18}>
+                  <div className="flex items-end justify-between mb-8">
+                    <div>
+                      <span className="text-xs font-semibold uppercase tracking-wider text-[#7D9565] block mb-1">
+                        Companion Planting
+                      </span>
+                      <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#153F2D]">
+                        Pairs Well In The Garden
+                      </h2>
+                    </div>
+                    <Link
+                      href={`/collections/${product.category.slug}`}
+                      className="text-xs font-bold text-[#153F2D] hover:underline"
+                    >
+                      More from {product.category.name} &rarr;
+                    </Link>
                   </div>
-                  <Link
-                    href={`/collections/${product.category.slug}`}
-                    className="text-xs font-bold text-[#153F2D] hover:underline"
-                  >
-                    More from {product.category.name} &rarr;
-                  </Link>
-                </div>
+                </ScrollReveal>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-                  {relatedProducts.map((rel) => (
+                  {relatedProducts.map((rel, idx) => (
                     <ProductCard
                       key={rel.id}
                       id={rel.id}
@@ -183,6 +186,7 @@ export default async function ProductDetailPage({
                       difficulty={rel.difficulty}
                       images={rel.images}
                       defaultVariant={rel.variants[0]}
+                      index={idx}
                     />
                   ))}
                 </div>

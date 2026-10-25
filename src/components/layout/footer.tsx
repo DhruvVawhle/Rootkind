@@ -1,69 +1,83 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { Sprout, Mail, ShieldCheck, Leaf, PackageCheck, Heart } from "lucide-react";
+import { StaggerContainer, StaggerItem } from "@/components/animation/stagger-container";
+import { ScrollReveal } from "@/components/animation/scroll-reveal";
 
 export function Footer() {
   return (
     <footer className="bg-[#153F2D] text-[#F7F4EA] border-t border-[#1C523B]">
       {/* Botanical Value Pillars Bar */}
       <div className="border-b border-[#1C523B]/80 py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="flex items-start gap-3.5">
-            <div className="p-2.5 rounded-full bg-[#7D9565]/20 text-[#7D9565] shrink-0">
-              <Sprout className="w-5 h-5" />
+        <StaggerContainer
+          as="div"
+          staggerDelay={0.07}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
+          <StaggerItem yOffset={16}>
+            <div className="flex items-start gap-3.5">
+              <div className="p-2.5 rounded-full bg-[#7D9565]/20 text-[#7D9565] shrink-0">
+                <Sprout className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="font-serif text-sm font-semibold text-white">
+                  100% Non-GMO Seeds
+                </h3>
+                <p className="text-xs text-[#E8E2D1]/80 mt-1 leading-relaxed">
+                  Open-pollinated, high-germination heirloom varieties grown by ethical Indian farmers.
+                </p>
+              </div>
             </div>
-            <div>
-              <h3 className="font-serif text-sm font-semibold text-white">
-                100% Non-GMO Seeds
-              </h3>
-              <p className="text-xs text-[#E8E2D1]/80 mt-1 leading-relaxed">
-                Open-pollinated, high-germination heirloom varieties grown by ethical Indian farmers.
-              </p>
-            </div>
-          </div>
+          </StaggerItem>
 
-          <div className="flex items-start gap-3.5">
-            <div className="p-2.5 rounded-full bg-[#7D9565]/20 text-[#7D9565] shrink-0">
-              <Leaf className="w-5 h-5" />
+          <StaggerItem yOffset={16}>
+            <div className="flex items-start gap-3.5">
+              <div className="p-2.5 rounded-full bg-[#7D9565]/20 text-[#7D9565] shrink-0">
+                <Leaf className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="font-serif text-sm font-semibold text-white">
+                  Living Microbial Soils
+                </h3>
+                <p className="text-xs text-[#E8E2D1]/80 mt-1 leading-relaxed">
+                  Peat-free, aged vermicompost and washed coir substrates aerated for container vitality.
+                </p>
+              </div>
             </div>
-            <div>
-              <h3 className="font-serif text-sm font-semibold text-white">
-                Living Microbial Soils
-              </h3>
-              <p className="text-xs text-[#E8E2D1]/80 mt-1 leading-relaxed">
-                Peat-free, aged vermicompost and washed coir substrates aerated for container vitality.
-              </p>
-            </div>
-          </div>
+          </StaggerItem>
 
-          <div className="flex items-start gap-3.5">
-            <div className="p-2.5 rounded-full bg-[#7D9565]/20 text-[#7D9565] shrink-0">
-              <ShieldCheck className="w-5 h-5" />
+          <StaggerItem yOffset={16}>
+            <div className="flex items-start gap-3.5">
+              <div className="p-2.5 rounded-full bg-[#7D9565]/20 text-[#7D9565] shrink-0">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="font-serif text-sm font-semibold text-white">
+                  Germination Guarantee
+                </h3>
+                <p className="text-xs text-[#E8E2D1]/80 mt-1 leading-relaxed">
+                  Free seed replacement if your packet fails to sprout with our guided instructions.
+                </p>
+              </div>
             </div>
-            <div>
-              <h3 className="font-serif text-sm font-semibold text-white">
-                Germination Guarantee
-              </h3>
-              <p className="text-xs text-[#E8E2D1]/80 mt-1 leading-relaxed">
-                Free seed replacement if your packet fails to sprout with our guided instructions.
-              </p>
-            </div>
-          </div>
+          </StaggerItem>
 
-          <div className="flex items-start gap-3.5">
-            <div className="p-2.5 rounded-full bg-[#7D9565]/20 text-[#7D9565] shrink-0">
-              <PackageCheck className="w-5 h-5" />
+          <StaggerItem yOffset={16}>
+            <div className="flex items-start gap-3.5">
+              <div className="p-2.5 rounded-full bg-[#7D9565]/20 text-[#7D9565] shrink-0">
+                <PackageCheck className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="font-serif text-sm font-semibold text-white">
+                  Plastic-Free Packaging
+                </h3>
+                <p className="text-xs text-[#E8E2D1]/80 mt-1 leading-relaxed">
+                  Delivered in biodegradable kraft bags and recycled corrugated fiber containers.
+                </p>
+              </div>
             </div>
-            <div>
-              <h3 className="font-serif text-sm font-semibold text-white">
-                Plastic-Free Packaging
-              </h3>
-              <p className="text-xs text-[#E8E2D1]/80 mt-1 leading-relaxed">
-                Delivered in biodegradable kraft bags and recycled corrugated fiber containers.
-              </p>
-            </div>
-          </div>
-        </div>
+          </StaggerItem>
+        </StaggerContainer>
       </div>
 
       {/* Main Footer Links & Newsletter */}

@@ -91,11 +91,19 @@ export const metadata: Metadata = {
 };
 
 import { Providers } from "@/components/providers";
+import { ScrollProgress } from "@/components/animation/scroll-progress";
+import { ScrollToTop } from "@/components/animation/scroll-to-top";
+import { CustomCursor } from "@/components/CustomCursor";
+import { GlobalMagneticWatcher } from "@/components/MagneticButton";
+import { LiquidFilterDefs } from "@/components/LiquidFilter";
+import { Mascot } from "@/components/Mascot";
 
 export default function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal?: React.ReactNode;
 }) {
   return (
     <html
@@ -103,13 +111,22 @@ export default function RootLayout({
       className={`${fontSerif.variable} ${fontSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground selection:bg-[#7D9565]/20 selection:text-[#153F2D]">
+        <ScrollProgress />
+        <LiquidFilterDefs />
+        <CustomCursor />
+        <GlobalMagneticWatcher />
+        <Mascot />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2.5 focus:font-medium focus:text-primary-foreground focus:shadow-xl focus:outline-none focus:ring-2 focus:ring-accent"
         >
           Skip to main content
         </a>
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          {modal}
+        </Providers>
+        <ScrollToTop />
       </body>
     </html>
   );

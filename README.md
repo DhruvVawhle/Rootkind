@@ -132,6 +132,8 @@ npm run db:seed
 ```bash
 npm run dev
 ```
+> **Note**: `npm run dev` automatically checks port 5433 and boots the embedded PostgreSQL server if it isn't already running, preventing database connection errors.
+
 The application will be accessible at [http://localhost:3000](http://localhost:3000).
 
 ### Production Build & Server
